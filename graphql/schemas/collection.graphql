@@ -1,0 +1,26 @@
+type CollectionInfo {
+  category: String
+  subcategory: String
+  description: String
+  cover_image: String
+  bg_image: String
+  sub_title: String
+  title: String
+  royalty: Int
+}
+
+type Collection {
+  id: ID
+  decimals: Int
+  name: String
+  symbol: String
+  address: String
+  owner: String
+  total_supply: Int
+  created_at: Int
+  updated_at: Int
+  store_id: String
+  opensea_floor_price: Int
+  info: CollectionInfo
+  isVerified: Boolean
+}

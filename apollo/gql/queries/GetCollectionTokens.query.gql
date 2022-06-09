@@ -1,0 +1,38 @@
+query GetCollectionTokens(
+  $sort: TokenSort
+  $buynow: Boolean
+  $isHidden: Boolean
+  $boosted: Boolean
+  $opensea: Boolean
+  $trackTotal: Boolean
+  $address: [String]!
+  $lastKey: Int!
+  $size: Int!
+) {
+  getCollectionTokens(
+    sort: $sort
+    buynow: $buynow
+    isHidden: $isHidden
+    boosted: $boosted
+    opensea: $opensea
+    track_total: $trackTotal
+    address: $address
+    lastKey: $lastKey
+    size: $size
+  ) {
+    name
+    id
+    contract_name
+    description
+    address
+    opensea_order {
+      starting_price
+      address
+    }
+    animation_url
+    image
+    token_uri
+    symbol
+    token_id
+  }
+}

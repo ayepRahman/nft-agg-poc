@@ -1,0 +1,11 @@
+query SearchCollections($searchTerm: String, $topSupply: Boolean, $size: Int) {
+  searchCollections(
+    searchTerm: $searchTerm
+    topSupply: $topSupply
+    size: $size
+  ) {
+    name
+    address
+    total_supply
+  }
+}

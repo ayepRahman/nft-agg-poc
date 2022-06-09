@@ -1,0 +1,12 @@
+overwrite: true
+schema: ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}
+documents: "apollo/gql/queries/*.{gql,graphql}"
+generates:
+  ./apollo/generated/queries.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      reactApolloVersion: 3
+      withHooks: true

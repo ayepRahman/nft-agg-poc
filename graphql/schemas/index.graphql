@@ -1,0 +1,34 @@
+# import "./collection.graphql"
+# import "./user.graphql"
+# import "./token.graphql"
+
+type Query {
+  getUsers: [User]
+  getUser(name: String!): User!
+  searchCollections(
+    searchTerm: String
+    lastKey: Int
+    size: Int
+    address: [String]
+    category: String
+    topSelling: Boolean
+    topSupply: Boolean
+    owner: String
+    claimed_by: String
+  ): [Collection]
+  getCollectionTokens(
+    address: [String]!
+    category: [String]
+    subcategory: [String]
+    chain: [String]
+    attributes: [String]
+    sort: TokenSort
+    buynow: Boolean
+    isHidden: Boolean
+    boosted: Boolean
+    lastKey: Int!
+    size: Int!
+    track_total: Boolean
+    opensea: Boolean
+  ): [Token]!
+}

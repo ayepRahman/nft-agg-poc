@@ -1,0 +1,48 @@
+enum TokenSort {
+  sortByLowest
+  sortByHighest
+  sortByNewest
+  sortBymostView
+  sortByMostBids
+}
+
+type TokenAttribute {
+  trait_type: String
+  value: String
+}
+
+type OpenSeaOrder {
+  address: String
+  token_id: String
+  listing_time: String
+  starting_price: String
+  ending_price: String
+  starting_price_eth: Int
+  ending_price_eth: Int
+  duration: String
+  auction_type: Int
+}
+
+type Token {
+  id: String
+  contract_name: String
+  name: String
+  description: String
+  address: String
+  token_id: String
+  current_owner: String
+  symbol: String
+  token_uri: String
+  chain: String
+  attributes: [TokenAttribute]
+  image: String
+  animation_url: String
+  created_at: Int
+  updated_at: Int
+  last_purchased_price: Int
+  view_count: Int
+  isVerified: Boolean
+  last_offered_price: Int
+  p_rarity: Int
+  opensea_order: OpenSeaOrder
+}
