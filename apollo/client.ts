@@ -5,10 +5,14 @@
 
 import {
   ApolloClient,
+  ApolloLink,
+  createHttpLink,
   InMemoryCache,
-  gql,
   NormalizedCacheObject,
 } from "@apollo/client";
+import { RestLink } from "apollo-link-rest";
+
+// https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd
 
 const isServer = typeof window === "undefined";
 const windowApolloState = !isServer && window.__NEXT_DATA__.apolloState;
@@ -17,10 +21,18 @@ let CLIENT: ApolloClient<NormalizedCacheObject>;
 
 export function getApolloClient(forceNew?: any) {
   if (!CLIENT || forceNew) {
+    const restLink = new RestLink({
+      endpoints: { coingecko: "api.coingecko.com/api/v3", v2: "api.com/v2" },
+    });
+    const httpLink = createHttpLink({
+      uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || "server.com/graphql",
+    });
+
     CLIENT = new ApolloClient({
       ssrMode: isServer,
-      uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, // confirm url to interace with api ?????
+      // uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, // confirm url to interace with api ?????
       cache: new InMemoryCache().restore(windowApolloState || {}),
+      link: ApolloLink.from([restLink, httpLink]),
 
       /**
         // Default options to disable SSR for all queries.

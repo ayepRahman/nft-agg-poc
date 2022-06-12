@@ -30,6 +30,7 @@ query GetCollectionTokens(
     opensea_order {
       starting_price
       address
+      starting_price_eth
     }
     animation_url
     image

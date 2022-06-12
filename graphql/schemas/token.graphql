@@ -17,7 +17,7 @@ type OpenSeaOrder {
   listing_time: String
   starting_price: String
   ending_price: String
-  starting_price_eth: Int
+  starting_price_eth: Float
   ending_price_eth: Int
   duration: String
   auction_type: Int

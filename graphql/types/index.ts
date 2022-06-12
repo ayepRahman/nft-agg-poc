@@ -52,7 +52,7 @@ export type OpenSeaOrder = {
   ending_price_eth?: Maybe<Scalars['Int']>;
   listing_time?: Maybe<Scalars['String']>;
   starting_price?: Maybe<Scalars['String']>;
-  starting_price_eth?: Maybe<Scalars['Int']>;
+  starting_price_eth?: Maybe<Scalars['Float']>;
   token_id?: Maybe<Scalars['String']>;
 };
 
@@ -218,6 +218,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Collection: ResolverTypeWrapper<Collection>;
   CollectionInfo: ResolverTypeWrapper<CollectionInfo>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   OpenSeaOrder: ResolverTypeWrapper<OpenSeaOrder>;
@@ -234,6 +235,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Collection: Collection;
   CollectionInfo: CollectionInfo;
+  Float: Scalars['Float'];
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   OpenSeaOrder: OpenSeaOrder;
@@ -281,7 +283,7 @@ export type OpenSeaOrderResolvers<ContextType = any, ParentType extends Resolver
   ending_price_eth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   listing_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   starting_price?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  starting_price_eth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  starting_price_eth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   token_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

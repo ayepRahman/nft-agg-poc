@@ -53,7 +53,7 @@ export type OpenSeaOrder = {
   ending_price_eth?: Maybe<Scalars['Int']>;
   listing_time?: Maybe<Scalars['String']>;
   starting_price?: Maybe<Scalars['String']>;
-  starting_price_eth?: Maybe<Scalars['Int']>;
+  starting_price_eth?: Maybe<Scalars['Float']>;
   token_id?: Maybe<Scalars['String']>;
 };
 
@@ -161,7 +161,7 @@ export type GetCollectionTokensQueryVariables = Exact<{
 }>;
 
 
-export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: Array<{ __typename?: 'Token', name?: string | null, id?: string | null, contract_name?: string | null, description?: string | null, address?: string | null, animation_url?: string | null, image?: string | null, token_uri?: string | null, symbol?: string | null, token_id?: string | null, opensea_order?: { __typename?: 'OpenSeaOrder', starting_price?: string | null, address?: string | null } | null } | null> };
+export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: Array<{ __typename?: 'Token', name?: string | null, id?: string | null, contract_name?: string | null, description?: string | null, address?: string | null, animation_url?: string | null, image?: string | null, token_uri?: string | null, symbol?: string | null, token_id?: string | null, opensea_order?: { __typename?: 'OpenSeaOrder', starting_price?: string | null, address?: string | null, starting_price_eth?: number | null } | null } | null> };
 
 export type GetUserQueryVariables = Exact<{
   name: Scalars['String'];
@@ -202,6 +202,7 @@ export const GetCollectionTokensDocument = gql`
     opensea_order {
       starting_price
       address
+      starting_price_eth
     }
     animation_url
     image
