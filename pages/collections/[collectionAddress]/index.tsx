@@ -8,7 +8,6 @@ import {
   Text,
   Grid,
   GridItem,
-  Image,
   theme,
   Skeleton,
   Button,
@@ -23,6 +22,7 @@ import {
 import { GetServerSideProps } from "next/types";
 import { FaShoppingCart, FaEthereum, FaTimes, FaFilter } from "react-icons/fa";
 import TokenCard from "components/TokenCard";
+import Image from "components/Image";
 import { convertImgUrl } from "utils/image";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -252,7 +252,13 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         {!isOpenCart ? (
           <FaShoppingCart fontSize="1rem" />
         ) : (
-          <Flex flexDir="column" gap="1rem">
+          <Flex
+            as={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            flexDir="column"
+            gap="1rem"
+          >
             <Flex w="full">
               <Box
                 ml="auto"

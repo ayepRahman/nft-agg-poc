@@ -3,7 +3,6 @@ import { convertImgUrl } from "utils/image";
 import {
   Box,
   theme,
-  Image,
   Skeleton,
   useColorMode,
   Flex,
@@ -17,6 +16,7 @@ import {
   FaPlus,
   FaPlusCircle,
 } from "react-icons/fa";
+import Image from "components/Image";
 import mintableLogo from "public/images/mintable_logo.jpeg";
 import openSeaLogo from "public/images/opensea_logo.png";
 import { motion } from "framer-motion";
@@ -85,6 +85,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
             boxSize="2rem"
             src={marketImgSrc.src}
             alt="adas"
+            zIndex="1"
           />
           {/* select icon */}
           {!isSelected && showSelectIcon && (
@@ -117,7 +118,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
           )}
           {/* ranking */}
           <Image
-            height="auto"
+            height="16rem"
             w="100%"
             maxW="100%"
             src={isLoading ? mintableLogo.src : imgUrl}
