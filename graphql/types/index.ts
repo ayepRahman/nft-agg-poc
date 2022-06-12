@@ -75,6 +75,7 @@ export type QueryGetCollectionTokensArgs = {
   isHidden?: InputMaybe<Scalars['Boolean']>;
   lastKey: Scalars['Int'];
   opensea?: InputMaybe<Scalars['Boolean']>;
+  searchTerm?: InputMaybe<Scalars['String']>;
   size: Scalars['Int'];
   sort?: InputMaybe<TokenSort>;
   subcategory?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;

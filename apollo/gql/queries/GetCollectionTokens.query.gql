@@ -8,6 +8,7 @@ query GetCollectionTokens(
   $address: [String]!
   $lastKey: Int!
   $size: Int!
+  $searchTerm: String
 ) {
   getCollectionTokens(
     sort: $sort
@@ -19,6 +20,7 @@ query GetCollectionTokens(
     address: $address
     lastKey: $lastKey
     size: $size
+    searchTerm: $searchTerm
   ) {
     name
     id

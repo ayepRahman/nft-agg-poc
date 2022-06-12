@@ -76,6 +76,7 @@ export type QueryGetCollectionTokensArgs = {
   isHidden?: InputMaybe<Scalars['Boolean']>;
   lastKey: Scalars['Int'];
   opensea?: InputMaybe<Scalars['Boolean']>;
+  searchTerm?: InputMaybe<Scalars['String']>;
   size: Scalars['Int'];
   sort?: InputMaybe<TokenSort>;
   subcategory?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -156,6 +157,7 @@ export type GetCollectionTokensQueryVariables = Exact<{
   address: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
   lastKey: Scalars['Int'];
   size: Scalars['Int'];
+  searchTerm?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -179,7 +181,7 @@ export type SearchCollectionsQuery = { __typename?: 'Query', searchCollections?:
 
 
 export const GetCollectionTokensDocument = gql`
-    query GetCollectionTokens($sort: TokenSort, $buynow: Boolean, $isHidden: Boolean, $boosted: Boolean, $opensea: Boolean, $trackTotal: Boolean, $address: [String]!, $lastKey: Int!, $size: Int!) {
+    query GetCollectionTokens($sort: TokenSort, $buynow: Boolean, $isHidden: Boolean, $boosted: Boolean, $opensea: Boolean, $trackTotal: Boolean, $address: [String]!, $lastKey: Int!, $size: Int!, $searchTerm: String) {
   getCollectionTokens(
     sort: $sort
     buynow: $buynow
@@ -190,6 +192,7 @@ export const GetCollectionTokensDocument = gql`
     address: $address
     lastKey: $lastKey
     size: $size
+    searchTerm: $searchTerm
   ) {
     name
     id
@@ -230,6 +233,7 @@ export const GetCollectionTokensDocument = gql`
  *      address: // value for 'address'
  *      lastKey: // value for 'lastKey'
  *      size: // value for 'size'
+ *      searchTerm: // value for 'searchTerm'
  *   },
  * });
  */

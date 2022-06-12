@@ -17,6 +17,7 @@ type Query {
     claimed_by: String
   ): [Collection]
   getCollectionTokens(
+    searchTerm: String
     address: [String]!
     category: [String]
     subcategory: [String]
