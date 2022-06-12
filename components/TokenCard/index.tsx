@@ -8,11 +8,18 @@ import {
   useColorMode,
   Flex,
   Text,
+  Button,
 } from "@chakra-ui/react";
 import { TokenCardProps } from "./interface";
-import { FaEthereum } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaEthereum,
+  FaPlus,
+  FaPlusCircle,
+} from "react-icons/fa";
 import mintableLogo from "public/images/mintable_logo.jpeg";
 import openSeaLogo from "public/images/opensea_logo.png";
+import { motion } from "framer-motion";
 
 const isEven = (value: number) => value % 2 === 0;
 
@@ -22,6 +29,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
   onClick,
   isLoading,
 }) => {
+  const [showSelectIcon, setShowSelectIcon] = React.useState<boolean>(false);
   const { colorMode } = useColorMode();
   const imgUrl = convertImgUrl(token?.animation_url || token?.image || "");
   const marketImgSrc = isEven(Number(token?.token_id))
@@ -50,6 +58,8 @@ const TokenCard: React.FC<TokenCardProps> = ({
 
   return (
     <Box
+      as={motion.div}
+      whileHover={{ scale: 1.02 }}
       overflow="hidden"
       onClick={onClick}
       borderRadius="12px"
@@ -61,6 +71,8 @@ const TokenCard: React.FC<TokenCardProps> = ({
           cursor: "pointer",
         },
       }}
+      onMouseEnter={() => setShowSelectIcon(true)}
+      onMouseLeave={() => setShowSelectIcon(false)}
     >
       <Box w="full" position="relative">
         <Skeleton isLoaded={!isLoading}>
@@ -75,6 +87,34 @@ const TokenCard: React.FC<TokenCardProps> = ({
             alt="adas"
           />
           {/* select icon */}
+          {!isSelected && showSelectIcon && (
+            <Box
+              position="absolute"
+              top="0.5rem"
+              right="0.5rem"
+              borderRadius="full"
+              boxSize="2rem"
+              bgColor="white"
+              opacity="0.5"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <FaPlus size="1.5rem" fill={theme.colors.pink[300]} />
+            </Box>
+          )}
+          {isSelected && (
+            <Box
+              position="absolute"
+              top="0.5rem"
+              right="0.5rem"
+              borderRadius="full"
+              boxSize="2rem"
+              bgColor="white"
+            >
+              <FaCheckCircle size="2rem" fill={theme.colors.pink[400]} />
+            </Box>
+          )}
           {/* ranking */}
           <Image
             height="auto"
@@ -91,7 +131,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
             <Text fontSize="14px">{isLoading ? "mocktext" : title}</Text>
           </Skeleton>
         </Flex>
-        <Flex w="full" justifyContent="space-between">
+        <Flex w="full" justifyContent="space-between" alignItems="center">
           <Skeleton borderRadius="md" isLoaded={!isLoading}>
             <Text
               display="flex"
@@ -101,6 +141,11 @@ const TokenCard: React.FC<TokenCardProps> = ({
             >
               {isLoading ? "mocktext" : priceInEth} <FaEthereum size={12} />
             </Text>
+          </Skeleton>
+          <Skeleton isLoaded={!isLoading}>
+            <Button colorScheme="pink" size="xs">
+              View more
+            </Button>
           </Skeleton>
         </Flex>
       </Box>

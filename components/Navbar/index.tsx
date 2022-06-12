@@ -19,9 +19,9 @@ const Navbar = () => {
       <Flex alignItems="center" gap="1">
         <Box cursor="pointer" onClick={() => toggleColorMode()}>
           {colorMode === ThemeMode.LIGHT ? (
-            <FaRegMoon size={20} color={theme.colors.pink[600]} />
+            <FaRegMoon size="24px" color={theme.colors.pink[600]} />
           ) : (
-            <FaSun size={20} color={theme.colors.pink[600]} />
+            <FaSun size="24px" color={theme.colors.pink[600]} />
           )}
         </Box>
       </Flex>

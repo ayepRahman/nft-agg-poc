@@ -11,7 +11,9 @@ import {
   Image,
   theme,
   Skeleton,
+  Button,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { themeGradient, ThemeMode } from "styles/defintions";
 import {
   Token,
@@ -19,7 +21,7 @@ import {
   useGetCollectionTokensQuery,
 } from "apollo/generated/queries";
 import { GetServerSideProps } from "next/types";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaEthereum, FaTimes, FaFilter } from "react-icons/fa";
 import TokenCard from "components/TokenCard";
 import { convertImgUrl } from "utils/image";
 
@@ -132,7 +134,9 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
       justifyContent="space-between"
     >
       {/* filter */}
-      <Box p="1rem">Filter</Box>
+      <Box p="1rem">
+        <FaFilter size="1rem" />
+      </Box>
       {/* lists */}
       <Flex
         w="100%"
@@ -225,15 +229,44 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         </InfiniteScroll>
       </Flex>
       {/* cart */}
-      <Box p="1rem" w={isOpenCart ? "30rem" : "fit-content"}>
+      <Box
+        p="1rem"
+        w="fit-content"
+        as={motion.div}
+        animate={isOpenCart ? "open" : "closed"}
+        variants={{
+          open: {
+            width: "30rem",
+            transition: {
+              duration: 0.3,
+            },
+          },
+          closed: {
+            width: "3rem",
+            transition: {
+              duration: 0.3,
+            },
+          },
+        }}
+      >
         {!isOpenCart ? (
-          <FaShoppingCart fontSize={24} />
+          <FaShoppingCart fontSize="1rem" />
         ) : (
           <Flex flexDir="column" gap="1rem">
+            <Flex w="full">
+              <Box
+                ml="auto"
+                cursor="pointer"
+                onClick={() => setSelectedTokenIds([])}
+              >
+                <FaTimes size="1rem" />
+              </Box>
+            </Flex>
+            {/* cart card */}
             <Box
               padding="0.5rem"
               borderRadius="md"
-              bgColor={theme.colors.gray[700]}
+              bgColor={theme.colors.gray[colorMode === "light" ? 100 : 700]}
             >
               {/* title */}
               <Flex gap="0.5rem" alignItems="center">
@@ -265,10 +298,16 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
 
                     return (
                       <Flex
+                        borderRadius="md"
                         padding="0.5rem"
                         w="full"
                         justifyContent="space-between"
                         key={`selected-item-${i}`}
+                        css={{
+                          "&:hover": {
+                            backgroundColor: theme.colors.gray[400],
+                          },
+                        }}
                       >
                         <Flex alignItems="center" gap="0.5rem">
                           <Image
@@ -285,6 +324,11 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
                             <Text>{st?.name}</Text>
                           </Box>
                         </Flex>
+
+                        <Flex alignItems="center" gap="0.25rem">
+                          <Text>{st?.opensea_order?.starting_price_eth}</Text>
+                          <FaEthereum />
+                        </Flex>
                       </Flex>
                     );
                   })}
@@ -292,12 +336,29 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
                   h="1px"
                   w="full"
                   my="1rem"
-                  bgColor={theme.colors.gray[600]}
+                  bgColor={theme.colors.gray[colorMode === "light" ? 400 : 600]}
                 />
 
-                <Flex mb="0.5rem">You Pay</Flex>
+                <Flex mb="0.5rem" w="full" justifyContent="space-between">
+                  <Text>You Pay</Text>
+                  <Flex alignItems="center" gap="0.5rem">
+                    <Text>
+                      {selectedTokens
+                        .map((st) => st?.opensea_order?.starting_price_eth ?? 0)
+                        .reduce((a, b) => a + b, 0)}
+                    </Text>
+                    <FaEthereum />
+                  </Flex>
+                </Flex>
               </Box>
             </Box>
+
+            <Button
+              colorScheme="pink"
+              onClick={() => alert("Feature coming soon!")}
+            >
+              Proceed to Checkout
+            </Button>
           </Flex>
         )}
       </Box>
