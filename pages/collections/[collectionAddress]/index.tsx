@@ -1,6 +1,14 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Box, Flex, Heading, useColorMode, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  useColorMode,
+  Text,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { themeGradient, ThemeMode } from "styles/defintions";
 import {
   TokenSort,
@@ -89,6 +97,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         borderX="1px"
         borderColor={borderColor}
       >
+        {/* header */}
         <Flex
           w="100%"
           py="1rem"
@@ -115,6 +124,43 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
             </Flex>
           </Box>
         </Flex>
+        {/* body */}
+
+        {/* flex-shrink: 0;
+  margin: 2.5rem 0;
+  display: grid;
+  padding: 0 0.5rem 2rem;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)); */}
+
+        {/* "repeat(auto-fill, minmax(252px, 1fr))" */}
+
+        <Grid
+          p="1rem"
+          templateColumns="repeat(auto-fill, minmax(252px, 1fr))"
+          gap="1rem"
+        >
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+          <GridItem w="100%" h="10" bg="pink.500" />
+        </Grid>
       </Flex>
       {/* cart */}
       <Box p="1rem">Cart</Box>
