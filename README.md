@@ -33,10 +33,62 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
+## NextJs
+
+Next.js gives you the best developer experience with all the features you need for production: hybrid static & server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed.
+
+## Graphql
+
+- GraphQL queries access not just the properties of one resource but also smoothly follow references between them. While typical REST APIs require loading from multiple URLs, GraphQL APIs get all the data your app needs in a single request. Apps using GraphQL can be quick even on slow mobile network connections.
+
+- GraphQL APIs are organized in terms of types and fields, not endpoints. Access the full capabilities of your data from a single endpoint. GraphQL uses types to ensure Apps only ask for what’s possible and provide clear and helpful errors. Apps can use types to avoid writing manual parsing code.
+
+- Know exactly what data you can request from your API without leaving your editor, highlight potential issues before sending a query, and take advantage of improved code intelligence. GraphQL makes it easy to build powerful tools like GraphiQL by leveraging your API’s type system.
+
 ## Apollo Client
+
+### Features
+
+- Declarative data fetching: Write a query and receive data without manually tracking loading states.
+
+- Excellent developer experience: Enjoy helpful tooling for TypeScript, Chrome / Firefox devtools, and VS Code.
+
+- Designed for modern React: Take advantage of the latest React features, such as hooks.
+
+- Incrementally adoptable: Drop Apollo into any JavaScript app and incorporate it feature by feature.
+
+- Support Typescript
+
+- Universally compatible: Use any build setup and any GraphQL API.
+
+- Community driven: Share knowledge with thousands of developers in the GraphQL community.
 
 ## Apollo Server
 
+### Features
+
+- A gateway for a federated supergraph
+- The GraphQL server for a subgraph in a federated supergraph
+
+- A stand-alone GraphQL server, including in a serverless environment
+- An add-on to your application's existing Node.js middleware (such as Express or Fastify)
+
 ## Codegen Graphql
 
+- Generate code from your GraphQL schema and operations with a simple CLI
+
+- Generate code from your GraphQL schema and GraphQL operations with a single function call regardless of your environment or code format
+
+- Plugins that support multiple library e.g react-query, react-apollo, typescript and many more.
+
 ## Chakra Ui
+
+- Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
+
+- Spend less time writing UI code and more time building a great experience for your customers.
+
+- Chakra UI strictly follows WAI-ARIA standards for all components.
+
+- Customize any part of our components to match your design needs.
+
+- Designed with composition in mind. Compose new components with ease.
