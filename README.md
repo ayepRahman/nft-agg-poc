@@ -47,7 +47,7 @@ Next.js gives you the best developer experience with all the features you need f
 
 ## Apollo Client
 
-![alt text]("./../public/frontend_backend_diagram.svg" "Logo Title Text 1")
+![alt text]("./public/frontend_backend_diagram.svg")
 
 ### Features
 
