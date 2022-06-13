@@ -21,9 +21,9 @@ let CLIENT: ApolloClient<NormalizedCacheObject>;
 
 export function getApolloClient(forceNew?: any) {
   if (!CLIENT || forceNew) {
-    const restLink = new RestLink({
-      endpoints: { coingecko: "api.coingecko.com/api/v3", v2: "api.com/v2" },
-    });
+    // const restLink = new RestLink({
+    //   endpoints: { coingecko: "api.coingecko.com/api/v3", v2: "api.com/v2" },
+    // });
     const httpLink = createHttpLink({
       uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || "server.com/graphql",
     });
@@ -32,7 +32,8 @@ export function getApolloClient(forceNew?: any) {
       ssrMode: isServer,
       // uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT, // confirm url to interace with api ?????
       cache: new InMemoryCache().restore(windowApolloState || {}),
-      link: ApolloLink.from([restLink, httpLink]),
+      link: ApolloLink.from([httpLink]),
+      // link: ApolloLink.from([restLink, httpLink]),
 
       /**
         // Default options to disable SSR for all queries.
