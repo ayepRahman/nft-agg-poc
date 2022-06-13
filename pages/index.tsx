@@ -19,6 +19,7 @@ import {
 import { useDebounce } from "hooks/useDebounce";
 import BounceLoader from "react-spinners/BounceLoader";
 import { useRouter } from "next/router";
+import { themeGradient } from "styles/defintions";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -40,7 +41,17 @@ const Home: NextPage = () => {
   return (
     <Container maxWidth="xl">
       <Box mt="30vh">
-        <Heading textAlign="center" mb="3" size="2xl">
+        <Heading
+          textAlign="center"
+          mb="3"
+          size="2xl"
+          background={themeGradient}
+          css={{
+            "text-fill-color": "transparent",
+            "-webkit-background-clip": "text",
+            "-webkit-text-fill-color": "transparent",
+          }}
+        >
           The NFT Aggregator
         </Heading>
         <Box>
