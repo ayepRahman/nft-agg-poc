@@ -1,5 +1,4 @@
-![poc1](./public/poc_1.png)
-![poc2](./public/poc_2.jpeg)
+![alt text](./public/frontend_backend_diagram.svg)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
@@ -50,8 +49,6 @@ Next.js gives you the best developer experience with all the features you need f
 
 ## Apollo Client
 
-![alt text](./public/frontend_backend_diagram.svg)
-
 ### Features
 
 - Declarative data fetching: Write a query and receive data without manually tracking loading states.
@@ -97,3 +94,8 @@ Next.js gives you the best developer experience with all the features you need f
 - Customize any part of our components to match your design needs.
 
 - Designed with composition in mind. Compose new components with ease.
+
+## Architecture
+
+![poc1](./public/poc_1.png)
+![poc2](./public/poc_2.jpeg)
