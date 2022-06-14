@@ -1,3 +1,6 @@
+![poc1](./public/poc_1.png)
+![poc2](./public/poc_2.jpeg)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
