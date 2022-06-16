@@ -64,6 +64,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
       onClick={onClick}
       borderRadius="12px"
       w="full"
+      h="full"
       boxShadow={getCardBoxShadow()}
       css={{
         "&:hover": {

@@ -184,6 +184,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         >
           <Grid
             p="1rem"
+            alignSelf="flex-start"
             templateColumns="repeat(auto-fill, minmax(252px, 1fr))"
             gap="1rem"
             height="calc(100vh - 136px)"
