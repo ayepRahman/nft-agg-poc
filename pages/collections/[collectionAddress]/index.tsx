@@ -15,7 +15,6 @@ import {
 import { motion } from "framer-motion";
 import { themeGradient, ThemeMode } from "styles/defintions";
 import {
-  Token,
   TokenSort,
   useGetCollectionTokensQuery,
 } from "apollo/generated/queries";
@@ -24,6 +23,8 @@ import { FaShoppingCart, FaEthereum, FaTimes, FaFilter } from "react-icons/fa";
 import TokenCard from "components/TokenCard";
 import Image from "components/Image";
 import { convertImgUrl } from "utils/image";
+import WalleConnectModal from "components/WalletDrawerButton";
+import { useConnect } from "wagmi";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const collectionAddress = Array.isArray(ctx?.query?.collectionAddress)
@@ -37,14 +38,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-/**
- * TODO: need additional endpoint for fetching collection info/details
- */
 const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
+  const { isConnected } = useConnect();
   const [selectedTokenIds, setSelectedTokenIds] = React.useState<string[]>([]);
   const [isOpenCart, setIsOpenCart] = React.useState<boolean>(false);
   const { colorMode } = useColorMode();
-  const { data, loading, refetch } = useGetCollectionTokensQuery({
+  const { data, loading } = useGetCollectionTokensQuery({
     variables: {
       address: [collectionAddress || ""],
       sort: TokenSort.SortByNewest,
@@ -359,12 +358,16 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
               </Box>
             </Box>
 
-            <Button
-              colorScheme="pink"
-              onClick={() => alert("Feature coming soon!")}
-            >
-              Proceed to Checkout
-            </Button>
+            {isConnected ? (
+              <Button
+                colorScheme="pink"
+                onClick={() => alert("Feature coming soon!")}
+              >
+                Proceed to Checkout
+              </Button>
+            ) : (
+              <WalleConnectModal />
+            )}
           </Flex>
         )}
       </Box>

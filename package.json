@@ -42,7 +42,7 @@
     "react-infinite-scroller": "^1.2.6",
     "react-spinners": "^0.12.0",
     "type-graphql": "^1.1.1",
-    "wagmi": "^0.4.10"
+    "wagmi": "^0.4.12"
   },
   "devDependencies": {
     "@types/micro-cors": "^0.1.2",
