@@ -1,3 +1,5 @@
+# import "./scalar.graphql"
+
 enum TokenSort {
   sortByLowest
   sortByHighest
@@ -18,9 +20,9 @@ type OpenSeaOrder {
   starting_price: String
   ending_price: String
   starting_price_eth: Float
-  ending_price_eth: Int
+  ending_price_eth: Float
   duration: String
-  auction_type: Int
+  auction_type: String
 }
 
 type Token {
@@ -37,12 +39,17 @@ type Token {
   attributes: [TokenAttribute]
   image: String
   animation_url: String
-  created_at: Int
-  updated_at: Int
-  last_purchased_price: Int
+  created_at: Date
+  updated_at: Date
+  last_purchased_price: Float
   view_count: Int
   isVerified: Boolean
-  last_offered_price: Int
-  p_rarity: Int
+  last_offered_price: Float
+  p_rarity: Float
   opensea_order: OpenSeaOrder
+}
+
+type CollectionTokenResult {
+  total: Int!
+  tokens: [Token]!
 }

@@ -1,11 +1,94 @@
-query SearchCollections($searchTerm: String, $topSupply: Boolean, $size: Int) {
+query SearchCollections(
+  $period: String
+  $limit: Int
+  $offset: Int
+  $order: String
+  $sortBy: String
+  $maxVolume: Int
+  $minVolume: Int
+  $minTrades: Int
+  $maxTrades: Int
+  $category: String
+  $network: Int
+  $searchTerm: String
+) {
   searchCollections(
-    searchTerm: $searchTerm
-    topSupply: $topSupply
-    size: $size
+    period: $period
+    limit: $limit
+    offset: $offset
+    order: $order
+    sort_by: $sortBy
+    max_volume: $maxVolume
+    min_volume: $minVolume
+    min_trades: $minTrades
+    max_trades: $maxTrades
+    category: $category
+    network: $network
+    search_term: $searchTerm
   ) {
+    decimals
+    logo
     name
+    symbol
     address
+    created_at
+    updated_at
     total_supply
+    item_sold
+    total_volume
+    lastRarityUpdated
+    lastRarityTotalCount
+    store_id
+    info {
+      category
+      subcategory
+      description
+      cover_image
+      bg_image
+      sub_title
+      title
+      royalty
+    }
+    isVerified
+    month_trades
+    floor_price_last_updated
+    previous_three_month_trades
+    mintable_floor_price
+    week_volume
+    week_trades
+    six_month_trades
+    month_volume
+    previous_bi_week_volume
+    previous_week_trades
+    previous_six_month_volume
+    previous_six_month_trades
+    three_month_volume
+    previous_week_volume
+    previous_month_volume
+    previous_three_month_volume
+    bi_week_volume
+    previous_month_trades
+    three_month_trades
+    opensea_floor_price
+    bi_week_trades
+    six_month_volume
+    previous_bi_week_trades
+    week_volume_data_points {
+      timestamp
+      volume
+    }
+    week_min_sales
+    week_max_sales
+    week_volume_percentage_change
+    bi_week_volume_percentage_change
+    month_volume_percentage_change
+    three_month_volume_percentage_change
+    six_month_volume_percentage_change
+    week_trades_percentage_change
+    bi_week_trades_percentage_change
+    month_trades_percentage_change
+    three_month_trades_percentage_change
+    six_month_trades_percentage_change
+    total_views
   }
 }

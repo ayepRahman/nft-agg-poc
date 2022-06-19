@@ -1,3 +1,5 @@
+# import "./scalar.graphql"
+
 type CollectionInfo {
   category: String
   subcategory: String
@@ -9,18 +11,62 @@ type CollectionInfo {
   royalty: Int
 }
 
+type WeekVolumeDataPoints {
+  timestamp: Float
+  volume: Float
+}
+
 type Collection {
-  id: ID
-  decimals: Int
+  decimals: String
+  logo: String
   name: String
   symbol: String
   address: String
-  owner: String
-  total_supply: Int
-  created_at: Int
-  updated_at: Int
+  created_at: Date
+  updated_at: Date
+  total_supply: Float
+  item_sold: Float
+  total_volume: Float
+  lastRarityUpdated: Float
+  lastRarityTotalCount: Float
   store_id: String
-  opensea_floor_price: Int
   info: CollectionInfo
   isVerified: Boolean
+  month_trades: Float
+  floor_price_last_updated: Float
+  previous_three_month_trades: Float
+  mintable_floor_price: Float
+  week_volume: Float
+  week_trades: Float
+  six_month_trades: Float
+  month_volume: Float
+  previous_bi_week_volume: Float
+  previous_week_trades: Float
+  previous_six_month_volume: Float
+  previous_six_month_trades: Float
+  three_month_volume: Float
+  previous_week_volume: Float
+  previous_month_volume: Float
+  previous_three_month_volume: Float
+  bi_week_volume: Float
+  previous_month_trades: Float
+  three_month_trades: Float
+  opensea_floor_price: Float
+  bi_week_trades: Float
+  six_month_volume: Float
+  previous_bi_week_trades: Float
+  week_volume_data_points: [WeekVolumeDataPoints]
+  week_min_sales: Float
+  week_max_sales: Float
+  week_volume_percentage_change: Float
+  bi_week_volume_percentage_change: Float
+  month_volume_percentage_change: Float
+  three_month_volume_percentage_change: Float
+  six_month_volume_percentage_change: Float
+  week_trades_percentage_change: Float
+  bi_week_trades_percentage_change: Float
+  month_trades_percentage_change: Float
+  three_month_trades_percentage_change: Float
+  six_month_trades_percentage_change: Float
+  total_views: Float
 }

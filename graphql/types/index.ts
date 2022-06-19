@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -12,23 +12,63 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
 };
 
 export type Collection = {
   __typename?: 'Collection';
   address?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['Int']>;
-  decimals?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['ID']>;
+  bi_week_trades?: Maybe<Scalars['Float']>;
+  bi_week_trades_percentage_change?: Maybe<Scalars['Float']>;
+  bi_week_volume?: Maybe<Scalars['Float']>;
+  bi_week_volume_percentage_change?: Maybe<Scalars['Float']>;
+  created_at?: Maybe<Scalars['Date']>;
+  decimals?: Maybe<Scalars['String']>;
+  floor_price_last_updated?: Maybe<Scalars['Float']>;
   info?: Maybe<CollectionInfo>;
   isVerified?: Maybe<Scalars['Boolean']>;
+  item_sold?: Maybe<Scalars['Float']>;
+  lastRarityTotalCount?: Maybe<Scalars['Float']>;
+  lastRarityUpdated?: Maybe<Scalars['Float']>;
+  logo?: Maybe<Scalars['String']>;
+  mintable_floor_price?: Maybe<Scalars['Float']>;
+  month_trades?: Maybe<Scalars['Float']>;
+  month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  month_volume?: Maybe<Scalars['Float']>;
+  month_volume_percentage_change?: Maybe<Scalars['Float']>;
   name?: Maybe<Scalars['String']>;
-  opensea_floor_price?: Maybe<Scalars['Int']>;
-  owner?: Maybe<Scalars['String']>;
+  opensea_floor_price?: Maybe<Scalars['Float']>;
+  previous_bi_week_trades?: Maybe<Scalars['Float']>;
+  previous_bi_week_volume?: Maybe<Scalars['Float']>;
+  previous_month_trades?: Maybe<Scalars['Float']>;
+  previous_month_volume?: Maybe<Scalars['Float']>;
+  previous_six_month_trades?: Maybe<Scalars['Float']>;
+  previous_six_month_volume?: Maybe<Scalars['Float']>;
+  previous_three_month_trades?: Maybe<Scalars['Float']>;
+  previous_three_month_volume?: Maybe<Scalars['Float']>;
+  previous_week_trades?: Maybe<Scalars['Float']>;
+  previous_week_volume?: Maybe<Scalars['Float']>;
+  six_month_trades?: Maybe<Scalars['Float']>;
+  six_month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  six_month_volume?: Maybe<Scalars['Float']>;
+  six_month_volume_percentage_change?: Maybe<Scalars['Float']>;
   store_id?: Maybe<Scalars['String']>;
   symbol?: Maybe<Scalars['String']>;
-  total_supply?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['Int']>;
+  three_month_trades?: Maybe<Scalars['Float']>;
+  three_month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  three_month_volume?: Maybe<Scalars['Float']>;
+  three_month_volume_percentage_change?: Maybe<Scalars['Float']>;
+  total_supply?: Maybe<Scalars['Float']>;
+  total_views?: Maybe<Scalars['Float']>;
+  total_volume?: Maybe<Scalars['Float']>;
+  updated_at?: Maybe<Scalars['Date']>;
+  week_max_sales?: Maybe<Scalars['Float']>;
+  week_min_sales?: Maybe<Scalars['Float']>;
+  week_trades?: Maybe<Scalars['Float']>;
+  week_trades_percentage_change?: Maybe<Scalars['Float']>;
+  week_volume?: Maybe<Scalars['Float']>;
+  week_volume_data_points?: Maybe<Array<Maybe<WeekVolumeDataPoints>>>;
+  week_volume_percentage_change?: Maybe<Scalars['Float']>;
 };
 
 export type CollectionInfo = {
@@ -43,13 +83,19 @@ export type CollectionInfo = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type CollectionTokenResult = {
+  __typename?: 'CollectionTokenResult';
+  tokens: Array<Maybe<Token>>;
+  total: Scalars['Int'];
+};
+
 export type OpenSeaOrder = {
   __typename?: 'OpenSeaOrder';
   address?: Maybe<Scalars['String']>;
-  auction_type?: Maybe<Scalars['Int']>;
+  auction_type?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['String']>;
   ending_price?: Maybe<Scalars['String']>;
-  ending_price_eth?: Maybe<Scalars['Int']>;
+  ending_price_eth?: Maybe<Scalars['Float']>;
   listing_time?: Maybe<Scalars['String']>;
   starting_price?: Maybe<Scalars['String']>;
   starting_price_eth?: Maybe<Scalars['Float']>;
@@ -58,7 +104,7 @@ export type OpenSeaOrder = {
 
 export type Query = {
   __typename?: 'Query';
-  getCollectionTokens: Array<Maybe<Token>>;
+  getCollectionTokens: CollectionTokenResult;
   getUser: User;
   getUsers?: Maybe<Array<Maybe<User>>>;
   searchCollections?: Maybe<Array<Maybe<Collection>>>;
@@ -89,15 +135,18 @@ export type QueryGetUserArgs = {
 
 
 export type QuerySearchCollectionsArgs = {
-  address?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   category?: InputMaybe<Scalars['String']>;
-  claimed_by?: InputMaybe<Scalars['String']>;
-  lastKey?: InputMaybe<Scalars['Int']>;
-  owner?: InputMaybe<Scalars['String']>;
-  searchTerm?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
-  topSelling?: InputMaybe<Scalars['Boolean']>;
-  topSupply?: InputMaybe<Scalars['Boolean']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  max_trades?: InputMaybe<Scalars['Int']>;
+  max_volume?: InputMaybe<Scalars['Int']>;
+  min_trades?: InputMaybe<Scalars['Int']>;
+  min_volume?: InputMaybe<Scalars['Int']>;
+  network?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order?: InputMaybe<Scalars['String']>;
+  period?: InputMaybe<Scalars['String']>;
+  search_term?: InputMaybe<Scalars['String']>;
+  sort_by?: InputMaybe<Scalars['String']>;
 };
 
 export type Token = {
@@ -107,21 +156,21 @@ export type Token = {
   attributes?: Maybe<Array<Maybe<TokenAttribute>>>;
   chain?: Maybe<Scalars['String']>;
   contract_name?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['Date']>;
   current_owner?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   isVerified?: Maybe<Scalars['Boolean']>;
-  last_offered_price?: Maybe<Scalars['Int']>;
-  last_purchased_price?: Maybe<Scalars['Int']>;
+  last_offered_price?: Maybe<Scalars['Float']>;
+  last_purchased_price?: Maybe<Scalars['Float']>;
   name?: Maybe<Scalars['String']>;
   opensea_order?: Maybe<OpenSeaOrder>;
-  p_rarity?: Maybe<Scalars['Int']>;
+  p_rarity?: Maybe<Scalars['Float']>;
   symbol?: Maybe<Scalars['String']>;
   token_id?: Maybe<Scalars['String']>;
   token_uri?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['Date']>;
   view_count?: Maybe<Scalars['Int']>;
 };
 
@@ -144,6 +193,12 @@ export type User = {
   avatar_url?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['ID']>;
   login?: Maybe<Scalars['String']>;
+};
+
+export type WeekVolumeDataPoints = {
+  __typename?: 'WeekVolumeDataPoints';
+  timestamp?: Maybe<Scalars['Float']>;
+  volume?: Maybe<Scalars['Float']>;
 };
 
 
@@ -218,6 +273,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Collection: ResolverTypeWrapper<Collection>;
   CollectionInfo: ResolverTypeWrapper<CollectionInfo>;
+  CollectionTokenResult: ResolverTypeWrapper<CollectionTokenResult>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -228,6 +285,7 @@ export type ResolversTypes = {
   TokenAttribute: ResolverTypeWrapper<TokenAttribute>;
   TokenSort: TokenSort;
   User: ResolverTypeWrapper<User>;
+  WeekVolumeDataPoints: ResolverTypeWrapper<WeekVolumeDataPoints>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -235,6 +293,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Collection: Collection;
   CollectionInfo: CollectionInfo;
+  CollectionTokenResult: CollectionTokenResult;
+  Date: Scalars['Date'];
   Float: Scalars['Float'];
   ID: Scalars['ID'];
   Int: Scalars['Int'];
@@ -244,22 +304,62 @@ export type ResolversParentTypes = {
   Token: Token;
   TokenAttribute: TokenAttribute;
   User: User;
+  WeekVolumeDataPoints: WeekVolumeDataPoints;
 };
 
 export type CollectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Collection'] = ResolversParentTypes['Collection']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  decimals?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  bi_week_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  bi_week_trades_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  bi_week_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  bi_week_volume_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  decimals?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  floor_price_last_updated?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   info?: Resolver<Maybe<ResolversTypes['CollectionInfo']>, ParentType, ContextType>;
   isVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  item_sold?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lastRarityTotalCount?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  lastRarityUpdated?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  logo?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  mintable_floor_price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  month_trades_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  month_volume_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  opensea_floor_price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  opensea_floor_price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_bi_week_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_bi_week_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_six_month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_six_month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_three_month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_three_month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_week_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  previous_week_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  six_month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  six_month_trades_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  six_month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  six_month_volume_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   store_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   symbol?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  total_supply?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  three_month_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  three_month_trades_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  three_month_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  three_month_volume_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  total_supply?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  total_views?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  total_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  week_max_sales?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  week_min_sales?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  week_trades?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  week_trades_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  week_volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  week_volume_data_points?: Resolver<Maybe<Array<Maybe<ResolversTypes['WeekVolumeDataPoints']>>>, ParentType, ContextType>;
+  week_volume_percentage_change?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -275,12 +375,22 @@ export type CollectionInfoResolvers<ContextType = any, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CollectionTokenResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['CollectionTokenResult'] = ResolversParentTypes['CollectionTokenResult']> = {
+  tokens?: Resolver<Array<Maybe<ResolversTypes['Token']>>, ParentType, ContextType>;
+  total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date';
+}
+
 export type OpenSeaOrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['OpenSeaOrder'] = ResolversParentTypes['OpenSeaOrder']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  auction_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  auction_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   duration?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   ending_price?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  ending_price_eth?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  ending_price_eth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   listing_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   starting_price?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   starting_price_eth?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -289,7 +399,7 @@ export type OpenSeaOrderResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getCollectionTokens?: Resolver<Array<Maybe<ResolversTypes['Token']>>, ParentType, ContextType, RequireFields<QueryGetCollectionTokensArgs, 'address' | 'lastKey' | 'size'>>;
+  getCollectionTokens?: Resolver<ResolversTypes['CollectionTokenResult'], ParentType, ContextType, RequireFields<QueryGetCollectionTokensArgs, 'address' | 'lastKey' | 'size'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'name'>>;
   getUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   searchCollections?: Resolver<Maybe<Array<Maybe<ResolversTypes['Collection']>>>, ParentType, ContextType, Partial<QuerySearchCollectionsArgs>>;
@@ -301,21 +411,21 @@ export type TokenResolvers<ContextType = any, ParentType extends ResolversParent
   attributes?: Resolver<Maybe<Array<Maybe<ResolversTypes['TokenAttribute']>>>, ParentType, ContextType>;
   chain?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contract_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   current_owner?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  last_offered_price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  last_purchased_price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  last_offered_price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  last_purchased_price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   opensea_order?: Resolver<Maybe<ResolversTypes['OpenSeaOrder']>, ParentType, ContextType>;
-  p_rarity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  p_rarity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   symbol?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   token_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   token_uri?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   view_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -333,13 +443,22 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type WeekVolumeDataPointsResolvers<ContextType = any, ParentType extends ResolversParentTypes['WeekVolumeDataPoints'] = ResolversParentTypes['WeekVolumeDataPoints']> = {
+  timestamp?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  volume?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Collection?: CollectionResolvers<ContextType>;
   CollectionInfo?: CollectionInfoResolvers<ContextType>;
+  CollectionTokenResult?: CollectionTokenResultResolvers<ContextType>;
+  Date?: GraphQLScalarType;
   OpenSeaOrder?: OpenSeaOrderResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Token?: TokenResolvers<ContextType>;
   TokenAttribute?: TokenAttributeResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  WeekVolumeDataPoints?: WeekVolumeDataPointsResolvers<ContextType>;
 };
 

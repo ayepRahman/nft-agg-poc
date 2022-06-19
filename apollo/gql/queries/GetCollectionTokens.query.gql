@@ -1,41 +1,71 @@
 query GetCollectionTokens(
-  $sort: TokenSort
-  $buynow: Boolean
-  $isHidden: Boolean
-  $boosted: Boolean
-  $opensea: Boolean
-  $trackTotal: Boolean
   $address: [String]!
   $lastKey: Int!
   $size: Int!
   $searchTerm: String
+  $category: [String]
+  $subcategory: [String]
+  $chain: [String]
+  $attributes: [String]
+  $sort: TokenSort
+  $buynow: Boolean
+  $isHidden: Boolean
+  $boosted: Boolean
+  $trackTotal: Boolean
+  $opensea: Boolean
 ) {
   getCollectionTokens(
-    sort: $sort
-    buynow: $buynow
-    isHidden: $isHidden
-    boosted: $boosted
-    opensea: $opensea
-    track_total: $trackTotal
     address: $address
     lastKey: $lastKey
     size: $size
     searchTerm: $searchTerm
+    category: $category
+    subcategory: $subcategory
+    chain: $chain
+    attributes: $attributes
+    sort: $sort
+    buynow: $buynow
+    isHidden: $isHidden
+    boosted: $boosted
+    track_total: $trackTotal
+    opensea: $opensea
   ) {
-    name
-    id
-    contract_name
-    description
-    address
-    opensea_order {
-      starting_price
+    total
+    tokens {
+      id
+      contract_name
+      name
+      description
       address
-      starting_price_eth
+      token_id
+      current_owner
+      symbol
+      token_uri
+      chain
+      image
+      animation_url
+      created_at
+      updated_at
+      last_purchased_price
+      view_count
+      isVerified
+      last_offered_price
+      p_rarity
+      opensea_order {
+        address
+        token_id
+        listing_time
+        starting_price
+        ending_price
+        starting_price_eth
+        ending_price_eth
+        duration
+        auction_type
+      }
+      attributes {
+        trait_type
+        value
+      }
     }
-    animation_url
-    image
-    token_uri
-    symbol
-    token_id
   }
 }

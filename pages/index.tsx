@@ -15,11 +15,13 @@ import {
   InputRightElement,
   useColorMode,
   theme,
+  Text,
 } from "@chakra-ui/react";
 import { useDebounce } from "hooks/useDebounce";
 import BounceLoader from "react-spinners/BounceLoader";
 import { useRouter } from "next/router";
 import { themeGradient } from "styles/defintions";
+import Image from "components/Image";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -30,8 +32,9 @@ const Home: NextPage = () => {
   const { data, loading } = useSearchCollectionsQuery({
     variables: {
       searchTerm: debounceSearchTerm,
-      topSupply: true,
-      size: 1,
+      limit: 10,
+      sortBy: "volume",
+      period: "week",
     },
     skip: !debounceSearchTerm,
   });
@@ -114,6 +117,7 @@ const Home: NextPage = () => {
                 {collections.length > 0 && (
                   <Box w="full" overflow="hidden" position="relative">
                     {collections?.map((c, i) => {
+                      console.log("collection", c);
                       return (
                         <Flex
                           onClick={() =>
@@ -129,9 +133,19 @@ const Home: NextPage = () => {
                               colorMode === "light" ? "gray.100" : "gray.700",
                           }}
                         >
-                          <Flex gap="1rem">
-                            {/* <Image /> */}
-                            {c?.name}
+                          <Flex gap="0.5rem" alignItems="center">
+                            <Image
+                              mr="auto"
+                              alignSelf="center"
+                              rounded="full"
+                              h="2rem"
+                              w="2rem"
+                              alt={c?.store_id || ""}
+                              src={
+                                c?.info?.cover_image || c?.info?.bg_image || ""
+                              }
+                            />
+                            <Text>{c?.name}</Text>
                           </Flex>
                           <Box>{c?.total_supply}</Box>
                         </Flex>

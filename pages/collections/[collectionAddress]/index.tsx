@@ -1,5 +1,6 @@
 import React from "react";
-import InfiniteScroll from "react-infinite-scroller";
+import InfiniteScroll from "react-infinite-scroll-component";
+
 import {
   Box,
   Flex,
@@ -15,6 +16,7 @@ import {
 import { motion } from "framer-motion";
 import { themeGradient, ThemeMode } from "styles/defintions";
 import {
+  GetCollectionTokensQuery,
   TokenSort,
   useGetCollectionTokensQuery,
 } from "apollo/generated/queries";
@@ -25,6 +27,8 @@ import Image from "components/Image";
 import { convertImgUrl } from "utils/image";
 import WalleConnectModal from "components/WalletDrawerButton";
 import { useConnect } from "wagmi";
+
+const FETCHING_LIMIT = 24;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const collectionAddress = Array.isArray(ctx?.query?.collectionAddress)
@@ -43,24 +47,34 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
   const [selectedTokenIds, setSelectedTokenIds] = React.useState<string[]>([]);
   const [isOpenCart, setIsOpenCart] = React.useState<boolean>(false);
   const { colorMode } = useColorMode();
-  const { data, loading } = useGetCollectionTokensQuery({
-    variables: {
+
+  const variables = React.useMemo(() => {
+    return {
       address: [collectionAddress || ""],
       sort: TokenSort.SortByNewest,
       buynow: true,
       isHidden: false,
       boosted: true,
       lastKey: 0,
-      size: 20,
+      size: FETCHING_LIMIT,
       opensea: true,
-      trackTotal: null,
-    },
+      trackTotal: true,
+    };
+  }, [collectionAddress]);
+
+  const { data, loading, fetchMore } = useGetCollectionTokensQuery({
+    variables,
     skip: !collectionAddress,
   });
 
   const tokens = React.useMemo(() => {
-    return data?.getCollectionTokens ?? [];
+    return data?.getCollectionTokens?.tokens ?? [];
   }, [data]);
+  const total = React.useMemo(() => {
+    return data?.getCollectionTokens?.total ?? 0;
+  }, [data]);
+
+  const hasMore = tokens?.length < total;
 
   const selectedTokens = React.useMemo(() => {
     if (!!selectedTokenIds?.length && !!tokens?.length) {
@@ -81,25 +95,26 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
 
   // logic for handling fetch more data
   const handleFetchMore = () => {
-    // if (fetchMore)
-    //   fetchMore({
-    //     variables: {
-    //       id: collectionId,
-    //       ...queryOptions,
-    //       skip: collectionTrendsData?.trendsFromCollectionId.length,
-    //       limit: FETCHING_LIMIT,
-    //     },
-    //     updateQuery: (prev: CollectionTrendQueryData, { fetchMoreResult }) => {
-    //       if (!fetchMoreResult) return prev;
-    //       return {
-    //         ...prev,
-    //         trendsFromCollectionId: [
-    //           ...prev.trendsFromCollectionId,
-    //           ...fetchMoreResult.trendsFromCollectionId,
-    //         ],
-    //       };
-    //     },
-    //   });
+    if (fetchMore)
+      fetchMore({
+        variables: {
+          ...variables,
+          lastKey: tokens.length,
+        },
+        updateQuery: (prev: GetCollectionTokensQuery, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prev;
+
+          return {
+            getCollectionTokens: {
+              total: fetchMoreResult?.getCollectionTokens?.total,
+              tokens: [
+                ...prev?.getCollectionTokens?.tokens,
+                ...fetchMoreResult?.getCollectionTokens?.tokens,
+              ],
+            },
+          };
+        },
+      });
   };
 
   const handleUnSelected = (id: string) => {
@@ -113,7 +128,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
   const loader = () => {
     return (
       <>
-        {Array.from({ length: 20 }, (_, i) => {
+        {Array.from({ length: 30 }, (_, i) => {
           return (
             <GridItem key={i} w="100%">
               <TokenCard token={{}} isLoading />
@@ -128,7 +143,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
     <Box
       display="inline-flex"
       w="100%"
-      height="calc(100vh - 50px)"
+      height="calc(100vh - 79px)"
       justifyContent="space-between"
     >
       {/* filter */}
@@ -177,31 +192,19 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         {/* body */}
 
         <InfiniteScroll
-          loadMore={handleFetchMore}
-          // hasMore={true}
-          // loader={loader()}
+          dataLength={tokens?.length}
+          next={handleFetchMore}
+          hasMore={hasMore}
+          loader={<></>}
+          height="calc(100vh - 156px)"
+          scrollThreshold={0.7}
         >
           <Grid
             p="1rem"
             alignItems="flex-start"
             templateColumns="repeat(auto-fill, minmax(252px, 1fr))"
             templateRows="auto 1fr"
-            autoFlow="dense"
             gap="1rem"
-            height="calc(100vh - 136px)"
-            overflowY="auto"
-            css={{
-              "&::-webkit-scrollbar": {
-                width: "4px",
-              },
-              "&::-webkit-scrollbar-track": {
-                width: "6px",
-              },
-              "&::-webkit-scrollbar-thumb": {
-                background: "gray",
-                borderRadius: "24px",
-              },
-            }}
           >
             {loading ? (
               <>{loader()}</>

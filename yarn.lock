@@ -2458,12 +2458,12 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-infinite-scroller@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/@types/react-infinite-scroller/-/react-infinite-scroller-1.2.3.tgz"
-  integrity sha512-l60JckVoO+dxmKW2eEG7jbliEpITsTJvRPTe97GazjF5+ylagAuyYdXl8YY9DQsTP9QjhqGKZROknzgscGJy0A==
+"@types/react-infinite-scroll-component@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-infinite-scroll-component/-/react-infinite-scroll-component-5.0.0.tgz#f460f99f5c2f1b0eda482704505789100e0aaa6b"
+  integrity sha512-1DrmAOFfiy6nchA/KiXCAEzXxG4VHsEGJGlRyMZYy8A9WGfr0fAVe+MXep+VkjIPnNPf06qDbJGSNiPzt67wJg==
   dependencies:
-    "@types/react" "*"
+    react-infinite-scroll-component "*"
 
 "@types/react@*", "@types/react@18.0.12":
   version "18.0.12"
@@ -6520,7 +6520,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -6640,12 +6640,12 @@ react-icons@^4.4.0:
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.4.0.tgz"
   integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
 
-react-infinite-scroller@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.npmjs.org/react-infinite-scroller/-/react-infinite-scroller-1.2.6.tgz"
-  integrity sha512-mGdMyOD00YArJ1S1F3TVU9y4fGSfVVl6p5gh/Vt4u99CJOptfVu/q5V/Wlle72TMgYlBwIhbxK5wF0C/R33PXQ==
+react-infinite-scroll-component@*, react-infinite-scroll-component@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-infinite-scroll-component/-/react-infinite-scroll-component-6.1.0.tgz#7e511e7aa0f728ac3e51f64a38a6079ac522407f"
+  integrity sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==
   dependencies:
-    prop-types "^15.5.8"
+    throttle-debounce "^2.1.0"
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -7320,6 +7320,11 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+
+throttle-debounce@^2.1.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-2.3.0.tgz#fd31865e66502071e411817e241465b3e9c372e2"
+  integrity sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==
 
 through@^2.3.6:
   version "2.3.8"

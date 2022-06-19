@@ -13,23 +13,63 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
 };
 
 export type Collection = {
   __typename?: 'Collection';
   address?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['Int']>;
-  decimals?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['ID']>;
+  bi_week_trades?: Maybe<Scalars['Float']>;
+  bi_week_trades_percentage_change?: Maybe<Scalars['Float']>;
+  bi_week_volume?: Maybe<Scalars['Float']>;
+  bi_week_volume_percentage_change?: Maybe<Scalars['Float']>;
+  created_at?: Maybe<Scalars['Date']>;
+  decimals?: Maybe<Scalars['String']>;
+  floor_price_last_updated?: Maybe<Scalars['Float']>;
   info?: Maybe<CollectionInfo>;
   isVerified?: Maybe<Scalars['Boolean']>;
+  item_sold?: Maybe<Scalars['Float']>;
+  lastRarityTotalCount?: Maybe<Scalars['Float']>;
+  lastRarityUpdated?: Maybe<Scalars['Float']>;
+  logo?: Maybe<Scalars['String']>;
+  mintable_floor_price?: Maybe<Scalars['Float']>;
+  month_trades?: Maybe<Scalars['Float']>;
+  month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  month_volume?: Maybe<Scalars['Float']>;
+  month_volume_percentage_change?: Maybe<Scalars['Float']>;
   name?: Maybe<Scalars['String']>;
-  opensea_floor_price?: Maybe<Scalars['Int']>;
-  owner?: Maybe<Scalars['String']>;
+  opensea_floor_price?: Maybe<Scalars['Float']>;
+  previous_bi_week_trades?: Maybe<Scalars['Float']>;
+  previous_bi_week_volume?: Maybe<Scalars['Float']>;
+  previous_month_trades?: Maybe<Scalars['Float']>;
+  previous_month_volume?: Maybe<Scalars['Float']>;
+  previous_six_month_trades?: Maybe<Scalars['Float']>;
+  previous_six_month_volume?: Maybe<Scalars['Float']>;
+  previous_three_month_trades?: Maybe<Scalars['Float']>;
+  previous_three_month_volume?: Maybe<Scalars['Float']>;
+  previous_week_trades?: Maybe<Scalars['Float']>;
+  previous_week_volume?: Maybe<Scalars['Float']>;
+  six_month_trades?: Maybe<Scalars['Float']>;
+  six_month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  six_month_volume?: Maybe<Scalars['Float']>;
+  six_month_volume_percentage_change?: Maybe<Scalars['Float']>;
   store_id?: Maybe<Scalars['String']>;
   symbol?: Maybe<Scalars['String']>;
-  total_supply?: Maybe<Scalars['Int']>;
-  updated_at?: Maybe<Scalars['Int']>;
+  three_month_trades?: Maybe<Scalars['Float']>;
+  three_month_trades_percentage_change?: Maybe<Scalars['Float']>;
+  three_month_volume?: Maybe<Scalars['Float']>;
+  three_month_volume_percentage_change?: Maybe<Scalars['Float']>;
+  total_supply?: Maybe<Scalars['Float']>;
+  total_views?: Maybe<Scalars['Float']>;
+  total_volume?: Maybe<Scalars['Float']>;
+  updated_at?: Maybe<Scalars['Date']>;
+  week_max_sales?: Maybe<Scalars['Float']>;
+  week_min_sales?: Maybe<Scalars['Float']>;
+  week_trades?: Maybe<Scalars['Float']>;
+  week_trades_percentage_change?: Maybe<Scalars['Float']>;
+  week_volume?: Maybe<Scalars['Float']>;
+  week_volume_data_points?: Maybe<Array<Maybe<WeekVolumeDataPoints>>>;
+  week_volume_percentage_change?: Maybe<Scalars['Float']>;
 };
 
 export type CollectionInfo = {
@@ -44,13 +84,19 @@ export type CollectionInfo = {
   title?: Maybe<Scalars['String']>;
 };
 
+export type CollectionTokenResult = {
+  __typename?: 'CollectionTokenResult';
+  tokens: Array<Maybe<Token>>;
+  total: Scalars['Int'];
+};
+
 export type OpenSeaOrder = {
   __typename?: 'OpenSeaOrder';
   address?: Maybe<Scalars['String']>;
   auction_type?: Maybe<Scalars['Int']>;
   duration?: Maybe<Scalars['String']>;
   ending_price?: Maybe<Scalars['String']>;
-  ending_price_eth?: Maybe<Scalars['Int']>;
+  ending_price_eth?: Maybe<Scalars['Float']>;
   listing_time?: Maybe<Scalars['String']>;
   starting_price?: Maybe<Scalars['String']>;
   starting_price_eth?: Maybe<Scalars['Float']>;
@@ -59,7 +105,7 @@ export type OpenSeaOrder = {
 
 export type Query = {
   __typename?: 'Query';
-  getCollectionTokens: Array<Maybe<Token>>;
+  getCollectionTokens: CollectionTokenResult;
   getUser: User;
   getUsers?: Maybe<Array<Maybe<User>>>;
   searchCollections?: Maybe<Array<Maybe<Collection>>>;
@@ -90,15 +136,18 @@ export type QueryGetUserArgs = {
 
 
 export type QuerySearchCollectionsArgs = {
-  address?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   category?: InputMaybe<Scalars['String']>;
-  claimed_by?: InputMaybe<Scalars['String']>;
-  lastKey?: InputMaybe<Scalars['Int']>;
-  owner?: InputMaybe<Scalars['String']>;
-  searchTerm?: InputMaybe<Scalars['String']>;
-  size?: InputMaybe<Scalars['Int']>;
-  topSelling?: InputMaybe<Scalars['Boolean']>;
-  topSupply?: InputMaybe<Scalars['Boolean']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  max_trades?: InputMaybe<Scalars['Int']>;
+  max_volume?: InputMaybe<Scalars['Int']>;
+  min_trades?: InputMaybe<Scalars['Int']>;
+  min_volume?: InputMaybe<Scalars['Int']>;
+  network?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order?: InputMaybe<Scalars['String']>;
+  period?: InputMaybe<Scalars['String']>;
+  search_term?: InputMaybe<Scalars['String']>;
+  sort_by?: InputMaybe<Scalars['String']>;
 };
 
 export type Token = {
@@ -108,21 +157,21 @@ export type Token = {
   attributes?: Maybe<Array<Maybe<TokenAttribute>>>;
   chain?: Maybe<Scalars['String']>;
   contract_name?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['Int']>;
+  created_at?: Maybe<Scalars['Date']>;
   current_owner?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   isVerified?: Maybe<Scalars['Boolean']>;
   last_offered_price?: Maybe<Scalars['Int']>;
-  last_purchased_price?: Maybe<Scalars['Int']>;
+  last_purchased_price?: Maybe<Scalars['Float']>;
   name?: Maybe<Scalars['String']>;
   opensea_order?: Maybe<OpenSeaOrder>;
-  p_rarity?: Maybe<Scalars['Int']>;
+  p_rarity?: Maybe<Scalars['Float']>;
   symbol?: Maybe<Scalars['String']>;
   token_id?: Maybe<Scalars['String']>;
   token_uri?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['Date']>;
   view_count?: Maybe<Scalars['Int']>;
 };
 
@@ -147,21 +196,31 @@ export type User = {
   login?: Maybe<Scalars['String']>;
 };
 
+export type WeekVolumeDataPoints = {
+  __typename?: 'WeekVolumeDataPoints';
+  timestamp?: Maybe<Scalars['Float']>;
+  volume?: Maybe<Scalars['Float']>;
+};
+
 export type GetCollectionTokensQueryVariables = Exact<{
-  sort?: InputMaybe<TokenSort>;
-  buynow?: InputMaybe<Scalars['Boolean']>;
-  isHidden?: InputMaybe<Scalars['Boolean']>;
-  boosted?: InputMaybe<Scalars['Boolean']>;
-  opensea?: InputMaybe<Scalars['Boolean']>;
-  trackTotal?: InputMaybe<Scalars['Boolean']>;
   address: Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>;
   lastKey: Scalars['Int'];
   size: Scalars['Int'];
   searchTerm?: InputMaybe<Scalars['String']>;
+  category?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  subcategory?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  chain?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  attributes?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+  sort?: InputMaybe<TokenSort>;
+  buynow?: InputMaybe<Scalars['Boolean']>;
+  isHidden?: InputMaybe<Scalars['Boolean']>;
+  boosted?: InputMaybe<Scalars['Boolean']>;
+  trackTotal?: InputMaybe<Scalars['Boolean']>;
+  opensea?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
-export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: Array<{ __typename?: 'Token', name?: string | null, id?: string | null, contract_name?: string | null, description?: string | null, address?: string | null, animation_url?: string | null, image?: string | null, token_uri?: string | null, symbol?: string | null, token_id?: string | null, opensea_order?: { __typename?: 'OpenSeaOrder', starting_price?: string | null, address?: string | null, starting_price_eth?: number | null } | null } | null> };
+export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: { __typename?: 'CollectionTokenResult', total: number, tokens: Array<{ __typename?: 'Token', id?: string | null, contract_name?: string | null, name?: string | null, description?: string | null, address?: string | null, token_id?: string | null, current_owner?: string | null, symbol?: string | null, token_uri?: string | null, chain?: string | null, image?: string | null, animation_url?: string | null, created_at?: any | null, updated_at?: any | null, last_purchased_price?: number | null, view_count?: number | null, isVerified?: boolean | null, last_offered_price?: number | null, p_rarity?: number | null, opensea_order?: { __typename?: 'OpenSeaOrder', address?: string | null, token_id?: string | null, listing_time?: string | null, starting_price?: string | null, ending_price?: string | null, starting_price_eth?: number | null, ending_price_eth?: number | null, duration?: string | null, auction_type?: number | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', trait_type?: string | null, value?: string | null } | null> | null } | null> } };
 
 export type GetUserQueryVariables = Exact<{
   name: Scalars['String'];
@@ -171,44 +230,79 @@ export type GetUserQueryVariables = Exact<{
 export type GetUserQuery = { __typename?: 'Query', getUser: { __typename?: 'User', avatar_url?: string | null, login?: string | null, id?: string | null } };
 
 export type SearchCollectionsQueryVariables = Exact<{
+  period?: InputMaybe<Scalars['String']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order?: InputMaybe<Scalars['String']>;
+  sortBy?: InputMaybe<Scalars['String']>;
+  maxVolume?: InputMaybe<Scalars['Int']>;
+  minVolume?: InputMaybe<Scalars['Int']>;
+  minTrades?: InputMaybe<Scalars['Int']>;
+  maxTrades?: InputMaybe<Scalars['Int']>;
+  category?: InputMaybe<Scalars['String']>;
+  network?: InputMaybe<Scalars['Int']>;
   searchTerm?: InputMaybe<Scalars['String']>;
-  topSupply?: InputMaybe<Scalars['Boolean']>;
-  size?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type SearchCollectionsQuery = { __typename?: 'Query', searchCollections?: Array<{ __typename?: 'Collection', name?: string | null, address?: string | null, total_supply?: number | null } | null> | null };
+export type SearchCollectionsQuery = { __typename?: 'Query', searchCollections?: Array<{ __typename?: 'Collection', decimals?: string | null, logo?: string | null, name?: string | null, symbol?: string | null, address?: string | null, created_at?: any | null, updated_at?: any | null, total_supply?: number | null, item_sold?: number | null, total_volume?: number | null, lastRarityUpdated?: number | null, lastRarityTotalCount?: number | null, store_id?: string | null, isVerified?: boolean | null, month_trades?: number | null, floor_price_last_updated?: number | null, previous_three_month_trades?: number | null, mintable_floor_price?: number | null, week_volume?: number | null, week_trades?: number | null, six_month_trades?: number | null, month_volume?: number | null, previous_bi_week_volume?: number | null, previous_week_trades?: number | null, previous_six_month_volume?: number | null, previous_six_month_trades?: number | null, three_month_volume?: number | null, previous_week_volume?: number | null, previous_month_volume?: number | null, previous_three_month_volume?: number | null, bi_week_volume?: number | null, previous_month_trades?: number | null, three_month_trades?: number | null, opensea_floor_price?: number | null, bi_week_trades?: number | null, six_month_volume?: number | null, previous_bi_week_trades?: number | null, week_min_sales?: number | null, week_max_sales?: number | null, week_volume_percentage_change?: number | null, bi_week_volume_percentage_change?: number | null, month_volume_percentage_change?: number | null, three_month_volume_percentage_change?: number | null, six_month_volume_percentage_change?: number | null, week_trades_percentage_change?: number | null, bi_week_trades_percentage_change?: number | null, month_trades_percentage_change?: number | null, three_month_trades_percentage_change?: number | null, six_month_trades_percentage_change?: number | null, total_views?: number | null, info?: { __typename?: 'CollectionInfo', category?: string | null, subcategory?: string | null, description?: string | null, cover_image?: string | null, bg_image?: string | null, sub_title?: string | null, title?: string | null, royalty?: number | null } | null, week_volume_data_points?: Array<{ __typename?: 'WeekVolumeDataPoints', timestamp?: number | null, volume?: number | null } | null> | null } | null> | null };
 
 
 export const GetCollectionTokensDocument = gql`
-    query GetCollectionTokens($sort: TokenSort, $buynow: Boolean, $isHidden: Boolean, $boosted: Boolean, $opensea: Boolean, $trackTotal: Boolean, $address: [String]!, $lastKey: Int!, $size: Int!, $searchTerm: String) {
+    query GetCollectionTokens($address: [String]!, $lastKey: Int!, $size: Int!, $searchTerm: String, $category: [String], $subcategory: [String], $chain: [String], $attributes: [String], $sort: TokenSort, $buynow: Boolean, $isHidden: Boolean, $boosted: Boolean, $trackTotal: Boolean, $opensea: Boolean) {
   getCollectionTokens(
-    sort: $sort
-    buynow: $buynow
-    isHidden: $isHidden
-    boosted: $boosted
-    opensea: $opensea
-    track_total: $trackTotal
     address: $address
     lastKey: $lastKey
     size: $size
     searchTerm: $searchTerm
+    category: $category
+    subcategory: $subcategory
+    chain: $chain
+    attributes: $attributes
+    sort: $sort
+    buynow: $buynow
+    isHidden: $isHidden
+    boosted: $boosted
+    track_total: $trackTotal
+    opensea: $opensea
   ) {
-    name
-    id
-    contract_name
-    description
-    address
-    opensea_order {
-      starting_price
+    total
+    tokens {
+      id
+      contract_name
+      name
+      description
       address
-      starting_price_eth
+      token_id
+      current_owner
+      symbol
+      token_uri
+      chain
+      image
+      animation_url
+      created_at
+      updated_at
+      last_purchased_price
+      view_count
+      isVerified
+      last_offered_price
+      p_rarity
+      opensea_order {
+        address
+        token_id
+        listing_time
+        starting_price
+        ending_price
+        starting_price_eth
+        ending_price_eth
+        duration
+        auction_type
+      }
+      attributes {
+        trait_type
+        value
+      }
     }
-    animation_url
-    image
-    token_uri
-    symbol
-    token_id
   }
 }
     `;
@@ -225,16 +319,20 @@ export const GetCollectionTokensDocument = gql`
  * @example
  * const { data, loading, error } = useGetCollectionTokensQuery({
  *   variables: {
- *      sort: // value for 'sort'
- *      buynow: // value for 'buynow'
- *      isHidden: // value for 'isHidden'
- *      boosted: // value for 'boosted'
- *      opensea: // value for 'opensea'
- *      trackTotal: // value for 'trackTotal'
  *      address: // value for 'address'
  *      lastKey: // value for 'lastKey'
  *      size: // value for 'size'
  *      searchTerm: // value for 'searchTerm'
+ *      category: // value for 'category'
+ *      subcategory: // value for 'subcategory'
+ *      chain: // value for 'chain'
+ *      attributes: // value for 'attributes'
+ *      sort: // value for 'sort'
+ *      buynow: // value for 'buynow'
+ *      isHidden: // value for 'isHidden'
+ *      boosted: // value for 'boosted'
+ *      trackTotal: // value for 'trackTotal'
+ *      opensea: // value for 'opensea'
  *   },
  * });
  */
@@ -287,11 +385,85 @@ export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
 export const SearchCollectionsDocument = gql`
-    query SearchCollections($searchTerm: String, $topSupply: Boolean, $size: Int) {
-  searchCollections(searchTerm: $searchTerm, topSupply: $topSupply, size: $size) {
+    query SearchCollections($period: String, $limit: Int, $offset: Int, $order: String, $sortBy: String, $maxVolume: Int, $minVolume: Int, $minTrades: Int, $maxTrades: Int, $category: String, $network: Int, $searchTerm: String) {
+  searchCollections(
+    period: $period
+    limit: $limit
+    offset: $offset
+    order: $order
+    sort_by: $sortBy
+    max_volume: $maxVolume
+    min_volume: $minVolume
+    min_trades: $minTrades
+    max_trades: $maxTrades
+    category: $category
+    network: $network
+    search_term: $searchTerm
+  ) {
+    decimals
+    logo
     name
+    symbol
     address
+    created_at
+    updated_at
     total_supply
+    item_sold
+    total_volume
+    lastRarityUpdated
+    lastRarityTotalCount
+    store_id
+    info {
+      category
+      subcategory
+      description
+      cover_image
+      bg_image
+      sub_title
+      title
+      royalty
+    }
+    isVerified
+    month_trades
+    floor_price_last_updated
+    previous_three_month_trades
+    mintable_floor_price
+    week_volume
+    week_trades
+    six_month_trades
+    month_volume
+    previous_bi_week_volume
+    previous_week_trades
+    previous_six_month_volume
+    previous_six_month_trades
+    three_month_volume
+    previous_week_volume
+    previous_month_volume
+    previous_three_month_volume
+    bi_week_volume
+    previous_month_trades
+    three_month_trades
+    opensea_floor_price
+    bi_week_trades
+    six_month_volume
+    previous_bi_week_trades
+    week_volume_data_points {
+      timestamp
+      volume
+    }
+    week_min_sales
+    week_max_sales
+    week_volume_percentage_change
+    bi_week_volume_percentage_change
+    month_volume_percentage_change
+    three_month_volume_percentage_change
+    six_month_volume_percentage_change
+    week_trades_percentage_change
+    bi_week_trades_percentage_change
+    month_trades_percentage_change
+    three_month_trades_percentage_change
+    six_month_trades_percentage_change
+    total_views
   }
 }
     `;
@@ -308,9 +480,18 @@ export const SearchCollectionsDocument = gql`
  * @example
  * const { data, loading, error } = useSearchCollectionsQuery({
  *   variables: {
+ *      period: // value for 'period'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order: // value for 'order'
+ *      sortBy: // value for 'sortBy'
+ *      maxVolume: // value for 'maxVolume'
+ *      minVolume: // value for 'minVolume'
+ *      minTrades: // value for 'minTrades'
+ *      maxTrades: // value for 'maxTrades'
+ *      category: // value for 'category'
+ *      network: // value for 'network'
  *      searchTerm: // value for 'searchTerm'
- *      topSupply: // value for 'topSupply'
- *      size: // value for 'size'
  *   },
  * });
  */

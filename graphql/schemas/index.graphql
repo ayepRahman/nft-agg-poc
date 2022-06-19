@@ -6,15 +6,18 @@ type Query {
   getUsers: [User]
   getUser(name: String!): User!
   searchCollections(
-    searchTerm: String
-    lastKey: Int
-    size: Int
-    address: [String]
+    period: String
+    search_term: String
+    limit: Int
+    offset: Int
+    order: String # desc
+    sort_by: String # volume
+    min_volume: Int
+    max_volume: Int
+    min_trades: Int
+    max_trades: Int
     category: String
-    topSelling: Boolean
-    topSupply: Boolean
-    owner: String
-    claimed_by: String
+    network: Int
   ): [Collection]
   getCollectionTokens(
     searchTerm: String
@@ -31,5 +34,5 @@ type Query {
     size: Int!
     track_total: Boolean
     opensea: Boolean
-  ): [Token]!
+  ): CollectionTokenResult!
 }

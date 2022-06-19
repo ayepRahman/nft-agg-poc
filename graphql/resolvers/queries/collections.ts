@@ -1,28 +1,43 @@
 import axios from "axios";
 import {
   Collection,
+  CollectionTokenResult,
   QueryGetCollectionTokensArgs,
   QuerySearchCollectionsArgs,
   Token,
 } from "graphql/types";
+import url from "url";
 
 const searchCollections = async (
   _: any,
   args: QuerySearchCollectionsArgs
 ): Promise<Collection[]> => {
   try {
-    const url = process.env.NEXT_SERVER_CONTRACT_SEARCH_URL || "";
-    const res = await axios.post(url, {
-      ...args,
+    let searchParams: { [key: string]: string } = {};
+
+    Object.keys(args).forEach((key) => {
+      if (!!args?.[key as keyof QuerySearchCollectionsArgs]) {
+        searchParams[key] =
+          args?.[key as keyof QuerySearchCollectionsArgs]?.toString() || "";
+      }
     });
 
-    const data = res?.data ?? null;
-    const mappedData = !!data?.hits?.length
-      ? data?.hits?.map((h: any) => h._source)
-      : [];
+    const params = new url.URLSearchParams(searchParams);
+    const apiUrl = `${
+      process.env.NEXT_SERVER_CONTRACT_SEARCH_URL || ""
+    }/?${params.toString()}`;
 
-    return mappedData;
+    const res = await axios.get(apiUrl, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    const data = res?.data?.items ?? [];
+
+    return data;
   } catch (error: any) {
+    console.log("ERROR", error);
     throw error;
   }
 };
@@ -30,17 +45,33 @@ const searchCollections = async (
 const getCollectionTokens = async (
   _: any,
   args: QueryGetCollectionTokensArgs
-): Promise<Token[]> => {
-  const url = process.env.NEXT_SERVER_TOKEN_SEARCH_URL || "";
-  const res = await axios.post(url, {
-    ...args,
-  });
-  const data = res?.data ?? null;
-  const mappedData = !!data?.hits?.length
-    ? data?.hits?.map((h: any) => h._source)
-    : [];
+): Promise<CollectionTokenResult> => {
+  try {
+    const url = process.env.NEXT_SERVER_TOKEN_SEARCH_URL || "";
+    const res = await axios.post(url, {
+      ...args,
+    });
 
-  return mappedData;
+    const data = res?.data ?? null;
+    const mappedData: Token[] = !!data?.hits?.length
+      ? data?.hits?.map((h: any) => {
+          return {
+            ...h._source,
+            total_supply: h?._source?.total_supply
+              ? Number(h?._source?.total_supply)
+              : 0,
+          };
+        })
+      : [];
+
+    return {
+      total: data?.total?.value || 0,
+      tokens: mappedData,
+    };
+  } catch (error) {
+    console.log("ERROR", error);
+    throw error;
+  }
 };
 
 export { searchCollections, getCollectionTokens };
