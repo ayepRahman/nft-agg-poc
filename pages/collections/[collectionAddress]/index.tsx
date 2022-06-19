@@ -107,7 +107,6 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
   };
 
   const handleSelected = (id: string) => {
-    console.log("handleSelected", id);
     setSelectedTokenIds([...selectedTokenIds, id]);
   };
 
@@ -184,8 +183,10 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
         >
           <Grid
             p="1rem"
-            alignSelf="flex-start"
+            alignItems="flex-start"
             templateColumns="repeat(auto-fill, minmax(252px, 1fr))"
+            templateRows="auto 1fr"
+            autoFlow="dense"
             gap="1rem"
             height="calc(100vh - 136px)"
             overflowY="auto"

@@ -9,8 +9,6 @@ import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 const ALCHEMY_ID = process.env.NEXT_PUBLIC_ALCHEMY_API_ID;
 
-console.log("ALCHEMY_ID", ALCHEMY_ID);
-
 // Configure chains & providers with the Alchemy provider.
 // Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
 const { chains, provider, webSocketProvider } = configureChains(defaultChains, [

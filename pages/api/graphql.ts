@@ -16,8 +16,6 @@ const typeDefs = loadSchemaSync("graphql/schemas/*", {
   loaders: [new GraphQLFileLoader()],
 });
 
-// console.log(printSchema(typeDefs));
-
 const cors = Cors();
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 const startServer = apolloServer.start();

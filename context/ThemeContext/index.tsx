@@ -33,8 +33,6 @@ const ThemeProvider: React.FC<{
 }> = ({ initialTheme, children }) => {
   const [theme, setTheme] = React.useState(getInitialTheme);
 
-  console.log("THEME", theme);
-
   const rawSetTheme = (rawTheme: string) => {
     const root = window.document.documentElement;
     const isDark = rawTheme === ThemeMode.DARK;
@@ -46,7 +44,6 @@ const ThemeProvider: React.FC<{
   };
 
   const toggleTheme = () => {
-    console.log("CLICK");
     setTheme(theme === ThemeMode.LIGHT ? ThemeMode.DARK : ThemeMode.LIGHT);
   };
 
