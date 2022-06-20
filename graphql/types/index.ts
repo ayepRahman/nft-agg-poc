@@ -105,6 +105,7 @@ export type OpenSeaOrder = {
 export type Query = {
   __typename?: 'Query';
   getCollectionTokens: CollectionTokenResult;
+  getTokenDetails?: Maybe<Token>;
   getUser: User;
   getUsers?: Maybe<Array<Maybe<User>>>;
   searchCollections?: Maybe<Array<Maybe<Collection>>>;
@@ -126,6 +127,12 @@ export type QueryGetCollectionTokensArgs = {
   sort?: InputMaybe<TokenSort>;
   subcategory?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   track_total?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryGetTokenDetailsArgs = {
+  contractAddress: Scalars['String'];
+  tokenId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -400,6 +407,7 @@ export type OpenSeaOrderResolvers<ContextType = any, ParentType extends Resolver
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getCollectionTokens?: Resolver<ResolversTypes['CollectionTokenResult'], ParentType, ContextType, RequireFields<QueryGetCollectionTokensArgs, 'address' | 'lastKey' | 'size'>>;
+  getTokenDetails?: Resolver<Maybe<ResolversTypes['Token']>, ParentType, ContextType, RequireFields<QueryGetTokenDetailsArgs, 'contractAddress'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'name'>>;
   getUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   searchCollections?: Resolver<Maybe<Array<Maybe<ResolversTypes['Collection']>>>, ParentType, ContextType, Partial<QuerySearchCollectionsArgs>>;

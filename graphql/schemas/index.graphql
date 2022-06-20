@@ -4,7 +4,9 @@
 
 type Query {
   getUsers: [User]
+
   getUser(name: String!): User!
+
   searchCollections(
     period: String
     search_term: String
@@ -19,6 +21,7 @@ type Query {
     category: String
     network: Int
   ): [Collection]
+
   getCollectionTokens(
     searchTerm: String
     address: [String]!
@@ -35,4 +38,6 @@ type Query {
     track_total: Boolean
     opensea: Boolean
   ): CollectionTokenResult!
+
+  getTokenDetails(contractAddress: String!, tokenId: String): Token
 }

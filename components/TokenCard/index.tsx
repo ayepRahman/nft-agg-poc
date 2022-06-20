@@ -20,6 +20,8 @@ import Image from "components/Image";
 import mintableLogo from "public/images/mintable_logo.jpeg";
 import openSeaLogo from "public/images/opensea_logo.png";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+import { ThemeMode } from "styles/defintions";
 
 const isEven = (value: number) => value % 2 === 0;
 
@@ -29,6 +31,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
   onClick,
   isLoading,
 }) => {
+  const router = useRouter();
   const [showSelectIcon, setShowSelectIcon] = React.useState<boolean>(false);
   const { colorMode } = useColorMode();
   const imgUrl = convertImgUrl(token?.animation_url || token?.image || "");
@@ -54,6 +57,10 @@ const TokenCard: React.FC<TokenCardProps> = ({
           theme.colors.gray[colorMode === "light" ? 400 : 600]
         }`
       : ``;
+  };
+
+  const handleRedirect = () => {
+    router.push(`/assets/${token?.address}/${token?.token_id}`);
   };
 
   return (
@@ -145,7 +152,7 @@ const TokenCard: React.FC<TokenCardProps> = ({
             </Text>
           </Skeleton>
           <Skeleton isLoaded={!isLoading}>
-            <Button colorScheme="pink" size="xs">
+            <Button colorScheme="pink" size="xs" onClick={handleRedirect}>
               View more
             </Button>
           </Skeleton>

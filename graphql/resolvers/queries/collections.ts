@@ -11,7 +11,7 @@ import url from "url";
 const searchCollections = async (
   _: any,
   args: QuerySearchCollectionsArgs
-): Promise<Collection[]> => {
+): Promise<Collection[] | Error> => {
   try {
     let searchParams: { [key: string]: string } = {};
 
@@ -38,14 +38,14 @@ const searchCollections = async (
     return data;
   } catch (error: any) {
     console.log("ERROR", error);
-    throw error;
+    return new Error(error);
   }
 };
 
 const getCollectionTokens = async (
   _: any,
   args: QueryGetCollectionTokensArgs
-): Promise<CollectionTokenResult> => {
+): Promise<CollectionTokenResult | Error> => {
   try {
     const url = process.env.NEXT_SERVER_TOKEN_SEARCH_URL || "";
     const res = await axios.post(url, {
@@ -68,9 +68,9 @@ const getCollectionTokens = async (
       total: data?.total?.value || 0,
       tokens: mappedData,
     };
-  } catch (error) {
+  } catch (error: any) {
     console.log("ERROR", error);
-    throw error;
+    return new Error(error);
   }
 };
 
