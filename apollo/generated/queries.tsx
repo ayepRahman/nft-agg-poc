@@ -93,7 +93,7 @@ export type CollectionTokenResult = {
 export type OpenSeaOrder = {
   __typename?: 'OpenSeaOrder';
   address?: Maybe<Scalars['String']>;
-  auction_type?: Maybe<Scalars['Int']>;
+  auction_type?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['String']>;
   ending_price?: Maybe<Scalars['String']>;
   ending_price_eth?: Maybe<Scalars['Float']>;
@@ -106,6 +106,7 @@ export type OpenSeaOrder = {
 export type Query = {
   __typename?: 'Query';
   getCollectionTokens: CollectionTokenResult;
+  getTokenDetails?: Maybe<Token>;
   getUser: User;
   getUsers?: Maybe<Array<Maybe<User>>>;
   searchCollections?: Maybe<Array<Maybe<Collection>>>;
@@ -127,6 +128,12 @@ export type QueryGetCollectionTokensArgs = {
   sort?: InputMaybe<TokenSort>;
   subcategory?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   track_total?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryGetTokenDetailsArgs = {
+  contractAddress: Scalars['String'];
+  tokenId?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -163,7 +170,7 @@ export type Token = {
   id?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   isVerified?: Maybe<Scalars['Boolean']>;
-  last_offered_price?: Maybe<Scalars['Int']>;
+  last_offered_price?: Maybe<Scalars['Float']>;
   last_purchased_price?: Maybe<Scalars['Float']>;
   name?: Maybe<Scalars['String']>;
   opensea_order?: Maybe<OpenSeaOrder>;
@@ -220,7 +227,15 @@ export type GetCollectionTokensQueryVariables = Exact<{
 }>;
 
 
-export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: { __typename?: 'CollectionTokenResult', total: number, tokens: Array<{ __typename?: 'Token', id?: string | null, contract_name?: string | null, name?: string | null, description?: string | null, address?: string | null, token_id?: string | null, current_owner?: string | null, symbol?: string | null, token_uri?: string | null, chain?: string | null, image?: string | null, animation_url?: string | null, created_at?: any | null, updated_at?: any | null, last_purchased_price?: number | null, view_count?: number | null, isVerified?: boolean | null, last_offered_price?: number | null, p_rarity?: number | null, opensea_order?: { __typename?: 'OpenSeaOrder', address?: string | null, token_id?: string | null, listing_time?: string | null, starting_price?: string | null, ending_price?: string | null, starting_price_eth?: number | null, ending_price_eth?: number | null, duration?: string | null, auction_type?: number | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', trait_type?: string | null, value?: string | null } | null> | null } | null> } };
+export type GetCollectionTokensQuery = { __typename?: 'Query', getCollectionTokens: { __typename?: 'CollectionTokenResult', total: number, tokens: Array<{ __typename?: 'Token', id?: string | null, contract_name?: string | null, name?: string | null, description?: string | null, address?: string | null, token_id?: string | null, current_owner?: string | null, symbol?: string | null, token_uri?: string | null, chain?: string | null, image?: string | null, animation_url?: string | null, created_at?: any | null, updated_at?: any | null, last_purchased_price?: number | null, view_count?: number | null, isVerified?: boolean | null, last_offered_price?: number | null, p_rarity?: number | null, opensea_order?: { __typename?: 'OpenSeaOrder', address?: string | null, token_id?: string | null, listing_time?: string | null, starting_price?: string | null, ending_price?: string | null, starting_price_eth?: number | null, ending_price_eth?: number | null, duration?: string | null, auction_type?: string | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', trait_type?: string | null, value?: string | null } | null> | null } | null> } };
+
+export type GetTokenDetailsQueryVariables = Exact<{
+  contractAddress: Scalars['String'];
+  tokenId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetTokenDetailsQuery = { __typename?: 'Query', getTokenDetails?: { __typename?: 'Token', id?: string | null, contract_name?: string | null, name?: string | null, description?: string | null, address?: string | null, token_id?: string | null, current_owner?: string | null, symbol?: string | null, token_uri?: string | null, chain?: string | null, image?: string | null, animation_url?: string | null, created_at?: any | null, updated_at?: any | null, last_purchased_price?: number | null, view_count?: number | null, isVerified?: boolean | null, last_offered_price?: number | null, p_rarity?: number | null, attributes?: Array<{ __typename?: 'TokenAttribute', trait_type?: string | null, value?: string | null } | null> | null, opensea_order?: { __typename?: 'OpenSeaOrder', address?: string | null, token_id?: string | null, listing_time?: string | null, starting_price?: string | null, ending_price?: string | null, starting_price_eth?: number | null, ending_price_eth?: number | null, duration?: string | null, auction_type?: string | null } | null } | null };
 
 export type GetUserQueryVariables = Exact<{
   name: Scalars['String'];
@@ -347,6 +362,75 @@ export function useGetCollectionTokensLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type GetCollectionTokensQueryHookResult = ReturnType<typeof useGetCollectionTokensQuery>;
 export type GetCollectionTokensLazyQueryHookResult = ReturnType<typeof useGetCollectionTokensLazyQuery>;
 export type GetCollectionTokensQueryResult = Apollo.QueryResult<GetCollectionTokensQuery, GetCollectionTokensQueryVariables>;
+export const GetTokenDetailsDocument = gql`
+    query GetTokenDetails($contractAddress: String!, $tokenId: String) {
+  getTokenDetails(contractAddress: $contractAddress, tokenId: $tokenId) {
+    id
+    contract_name
+    name
+    description
+    address
+    token_id
+    current_owner
+    symbol
+    token_uri
+    chain
+    attributes {
+      trait_type
+      value
+    }
+    image
+    animation_url
+    created_at
+    updated_at
+    last_purchased_price
+    view_count
+    isVerified
+    last_offered_price
+    p_rarity
+    opensea_order {
+      address
+      token_id
+      listing_time
+      starting_price
+      ending_price
+      starting_price_eth
+      ending_price_eth
+      duration
+      auction_type
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetTokenDetailsQuery__
+ *
+ * To run a query within a React component, call `useGetTokenDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTokenDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTokenDetailsQuery({
+ *   variables: {
+ *      contractAddress: // value for 'contractAddress'
+ *      tokenId: // value for 'tokenId'
+ *   },
+ * });
+ */
+export function useGetTokenDetailsQuery(baseOptions: Apollo.QueryHookOptions<GetTokenDetailsQuery, GetTokenDetailsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTokenDetailsQuery, GetTokenDetailsQueryVariables>(GetTokenDetailsDocument, options);
+      }
+export function useGetTokenDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTokenDetailsQuery, GetTokenDetailsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTokenDetailsQuery, GetTokenDetailsQueryVariables>(GetTokenDetailsDocument, options);
+        }
+export type GetTokenDetailsQueryHookResult = ReturnType<typeof useGetTokenDetailsQuery>;
+export type GetTokenDetailsLazyQueryHookResult = ReturnType<typeof useGetTokenDetailsLazyQuery>;
+export type GetTokenDetailsQueryResult = Apollo.QueryResult<GetTokenDetailsQuery, GetTokenDetailsQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser($name: String!) {
   getUser(name: $name) {

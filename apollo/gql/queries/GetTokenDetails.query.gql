@@ -1,0 +1,38 @@
+query GetTokenDetails($contractAddress: String!, $tokenId: String) {
+  getTokenDetails(contractAddress: $contractAddress, tokenId: $tokenId) {
+    id
+    contract_name
+    name
+    description
+    address
+    token_id
+    current_owner
+    symbol
+    token_uri
+    chain
+    attributes {
+      trait_type
+      value
+    }
+    image
+    animation_url
+    created_at
+    updated_at
+    last_purchased_price
+    view_count
+    isVerified
+    last_offered_price
+    p_rarity
+    opensea_order {
+      address
+      token_id
+      listing_time
+      starting_price
+      ending_price
+      starting_price_eth
+      ending_price_eth
+      duration
+      auction_type
+    }
+  }
+}

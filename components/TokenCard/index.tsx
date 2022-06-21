@@ -10,18 +10,12 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { TokenCardProps } from "./interface";
-import {
-  FaCheckCircle,
-  FaEthereum,
-  FaPlus,
-  FaPlusCircle,
-} from "react-icons/fa";
+import { FaCheckCircle, FaEthereum, FaPlus } from "react-icons/fa";
 import Image from "components/Image";
 import mintableLogo from "public/images/mintable_logo.jpeg";
 import openSeaLogo from "public/images/opensea_logo.png";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { ThemeMode } from "styles/defintions";
 
 const isEven = (value: number) => value % 2 === 0;
 
@@ -59,7 +53,8 @@ const TokenCard: React.FC<TokenCardProps> = ({
       : ``;
   };
 
-  const handleRedirect = () => {
+  const handleRedirect = (event: any) => {
+    event.stopPropagation();
     router.push(`/assets/${token?.address}/${token?.token_id}`);
   };
 
