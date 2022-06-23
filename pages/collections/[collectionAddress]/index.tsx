@@ -321,7 +321,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
                       >
                         <Flex alignItems="center" gap="0.5rem">
                           <Image
-                            borderRadius="md"
+                            // borderRadius="md"
                             src={src}
                             height="3rem"
                             width="3rem"
