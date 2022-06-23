@@ -84,8 +84,10 @@ const TokenCard: React.FC<TokenCardProps> = ({
             position="absolute"
             top="0.5rem"
             left="0.5rem"
-            borderRadius="full"
-            boxSize="2rem"
+            rounded="full"
+            overflow="hidden"
+            height="32px"
+            width="32px"
             src={marketImgSrc.src}
             alt="adas"
             zIndex="1"
@@ -97,12 +99,14 @@ const TokenCard: React.FC<TokenCardProps> = ({
               top="0.5rem"
               right="0.5rem"
               borderRadius="full"
-              boxSize="2rem"
+              height="32px"
+              width="32px"
               bgColor="white"
               opacity="0.5"
               display="flex"
               justifyContent="center"
               alignItems="center"
+              zIndex="1"
             >
               <FaPlus size="1.5rem" fill={theme.colors.pink[300]} />
             </Box>
@@ -115,14 +119,16 @@ const TokenCard: React.FC<TokenCardProps> = ({
               borderRadius="full"
               boxSize="2rem"
               bgColor="white"
+              zIndex="1"
             >
               <FaCheckCircle size="2rem" fill={theme.colors.pink[400]} />
             </Box>
           )}
           {/* ranking */}
           <Image
-            height="16rem"
-            w="100%"
+            layout="responsive"
+            height="100%"
+            width="100%"
             maxW="100%"
             src={isLoading ? mintableLogo.src : imgUrl}
             alt={token.address || ""}

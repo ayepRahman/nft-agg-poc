@@ -156,11 +156,10 @@ const Home: NextPage = () => {
                           >
                             <Flex gap="0.5rem" alignItems="center">
                               <Image
-                                mr="auto"
+                                overflow="hidden"
                                 alignSelf="center"
-                                rounded="full"
-                                h="2rem"
-                                w="2rem"
+                                height="32"
+                                width="32"
                                 alt={c?.store_id || ""}
                                 src={
                                   c?.info?.cover_image ||

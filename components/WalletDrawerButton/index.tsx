@@ -72,8 +72,8 @@ const WalleConnectModal = () => {
                     >
                       <Image
                         // rounded="full"
-                        h="1.5rem"
-                        w="1.5rem"
+                        height="24px"
+                        width="24px"
                         src={connectorImages[connector.id].src}
                         alt={connector.id}
                       />

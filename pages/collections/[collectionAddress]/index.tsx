@@ -125,7 +125,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
     setSelectedTokenIds([...selectedTokenIds, id]);
   };
 
-  const loader = () => {
+  const loader = (length?: number) => {
     return (
       <>
         {Array.from({ length: 30 }, (_, i) => {
@@ -195,14 +195,24 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
           dataLength={tokens?.length}
           next={handleFetchMore}
           hasMore={hasMore}
-          loader={<></>}
+          loader={
+            <Grid
+              p="1rem"
+              alignItems="flex-start"
+              templateColumns="repeat(auto-fill, minmax(242px, 1fr))"
+              templateRows="auto 1fr"
+              gap="1rem"
+            >
+              <>{loader(12)}</>
+            </Grid>
+          }
           height="calc(100vh - 156px)"
           scrollThreshold={0.7}
         >
           <Grid
             p="1rem"
             alignItems="flex-start"
-            templateColumns="repeat(auto-fill, minmax(252px, 1fr))"
+            templateColumns="repeat(auto-fill, minmax(242px, 1fr))"
             templateRows="auto 1fr"
             gap="1rem"
           >
@@ -214,7 +224,7 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
                   tokens.map((t, i) => {
                     if (!t) return;
                     return (
-                      <GridItem key={i} w="100%">
+                      <GridItem key={t?.address} w="100%">
                         <TokenCard
                           token={t}
                           onClick={() =>
@@ -321,10 +331,10 @@ const Collection = ({ collectionAddress }: { collectionAddress: string }) => {
                       >
                         <Flex alignItems="center" gap="0.5rem">
                           <Image
-                            // borderRadius="md"
                             src={src}
-                            height="3rem"
-                            width="3rem"
+                            height="48px"
+                            width="48px"
+                            overflow="hidden"
                             alt={st?.name || ""}
                           />
                           <Box>
