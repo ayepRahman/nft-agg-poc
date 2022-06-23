@@ -15,6 +15,7 @@ const nextConfig = {
       "d1iczm3wxxz9zd.cloudfront.net",
       "lh3.googleusercontent.com",
       "ikzttp.mypinata.cloud",
+      "ipfs.io",
     ],
   },
 };
